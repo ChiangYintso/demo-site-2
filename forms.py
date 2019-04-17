@@ -1,8 +1,12 @@
-from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length
+from flask_wtf import FlaskForm
 
 
-class SignInForm(Form):
+class SignInForm(FlaskForm):
+    '''
+    This form is in index.html
+    '''
     name = StringField(
         'Name', validators=[DataRequired(message=u'Pls input your name!')])
     psword = PasswordField('Password',
