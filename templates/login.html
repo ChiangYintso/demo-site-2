@@ -5,25 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Welcome!</title>
 </head>
 
 <body>
     <h1>Hello! Please sign in first.</h1>
     <!-- SignInForm in forms.py -->
-    {% if tag %}
-    <div class="tag">invalid name or psword!</div>
-    {% endif %}
     <form method="POST">
         {{ form.csrf_token }}
+        {% for msg in form.name.errors %} <br />
+        <small class='error'>{{ msg }}</small>
+        {% endfor %}
         {{ form.name.label }} {{ form.name }} <br />
+        {% for msg in form.psword.errors %}
+        <small class='error'>{{ msg }}</small> <br />
+        {% endfor %}
         {{ form.psword.label }} {{ form.psword }} <br />
         {{ form.rememberMe }} {{ form.rememberMe.label }} <br />
         {{ form.submit }} <br />
     </form>
 </body>
 <style>
-    .tag {
+    .error {
         color: #ff0000;
     };
 </style>

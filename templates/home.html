@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>main page</title>
+</head>
+<body>
+    <h1>home</h1>
+    <a href="{{ url_for('new_note') }}">New note</a>
+    {% for note in notes %}
+        <div class="note">
+            <span>第{{ note.id }}条:</span>
+            <p>{{ note.body }}</p>
+            <a
+                class="btn"
+                href="{{ url_for('edit_note', note_id=note.id) }}"
+            >
+                Edit
+            </a>
+            <form
+                method="POST"
+                action="{{ url_for('delete_note', note_id=note.id) }}"
+            >
+                {{ form.csrf_token }}
+                {{ form.submit(class='btn') }}
+            </form>
+        </div>
+    {% endfor %}
+</body>
+<style type="text/css">
+    .note p {
+        font-size: 30px;
+        margin: 8px;
+    };
+    .note {
+        display: inline;
+    }
+    .note > .btn {
+        border: #000000;
+        border-radius: 90%;
+    }
+</style>
+</html>
